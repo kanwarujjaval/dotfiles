@@ -1,0 +1,38 @@
+[user]
+	name = {{ .full_name }}
+	email = {{ .email }}
+{{- if eq .chezmoi.os "darwin" }}
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBQOqVUXiWB2r3uZ14L5LiEskwUKbJG/ESlyjaEiJe8E
+
+[gpg]
+	format = ssh
+
+[gpg "ssh"]
+	program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+
+[commit]
+	gpgsign = true
+{{- end }}
+
+[diff]
+	colorMoved = default
+
+[core]
+	autocrlf = input
+	editor = vim
+
+[merge]
+	conflictstyle = diff3
+	tool = vimdiff
+
+[pull]
+	ff = only
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[include]
+	path = ~/.gitconfig.local

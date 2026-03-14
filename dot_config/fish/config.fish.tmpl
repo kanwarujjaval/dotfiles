@@ -1,0 +1,36 @@
+if status is-interactive
+    # Commands to run in interactive sessions can go here
+end
+
+set -g fish_greeting
+set -gx EDITOR nvim
+
+starship init fish | source
+zoxide init fish | source
+
+alias ll="eza -g --icons --git"
+alias lla="eza -la -g --icons --git"
+alias llt="eza -1 --icons --tree --git-ignore"
+alias search="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}' | xargs nvim"
+alias g="git"
+alias c="clear"
+alias v="nvim"
+{{ if eq .chezmoi.os "darwin" -}}
+alias brewup="brew update && brew upgrade --greedy && brew cleanup --prune=all && brew autoremove"
+{{ end -}}
+
+set -gx PATH $PATH /usr/local/bin
+set -gx XDG_CONFIG_HOME "$HOME/.config"
+abbr -a prs "gh pr list | fzf --preview 'gh pr diff {+1}' --preview-window=up:80%"
+fzf --fish | source
+
+set PATH $PATH {{ .chezmoi.homeDir }}/.local/bin
+{{ if eq .chezmoi.os "darwin" -}}
+# Google Cloud SDK
+if [ -f '{{ .chezmoi.homeDir }}/google-cloud-sdk/path.fish.inc' ]
+    . '{{ .chezmoi.homeDir }}/google-cloud-sdk/path.fish.inc'
+end
+
+# LM Studio CLI
+set -gx PATH $PATH {{ .chezmoi.homeDir }}/.lmstudio/bin
+{{ end -}}

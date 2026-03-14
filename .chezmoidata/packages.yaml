@@ -1,0 +1,108 @@
+packages:
+  common_cli:
+    - bat
+    - eza
+    - fd
+    - fish
+    - fzf
+    - k6
+    - neovim
+    - ripgrep
+    - starship
+    - tmux
+    - tree
+    - zoxide
+
+  mac_workstation:
+    formulae:
+      - bottom
+      - ccusage
+      - cocoapods
+      - fnm
+      - gemini-cli
+      - gh
+      - git-delta
+      - k9s
+      - kustomize
+      - neofetch
+      - openjdk
+      - pipx
+      - pyenv
+      - python-setuptools
+      - python@3.11
+      - wget
+      - ykman
+
+    casks:
+      - 1password
+      - 1password-cli
+      - alfred
+      - android-commandlinetools
+      - appcleaner
+      - arc
+      - bartender
+      - bruno
+      - chatgpt
+      - claude
+      - claude-code
+      - codex
+      - coteditor
+      - cursor
+      - daisydisk
+      - discord
+      - docker
+      - figma
+      - font-hasklig
+      - font-sauce-code-pro-nerd-font
+      - font-terminus
+      - freedom
+      - ghostty
+      - gitkraken
+      - google-chrome
+      - google-drive
+      - handbrake
+      - hush
+      - ivpn
+      - jetbrains-toolbox
+      - keka
+      - knockknock
+      - little-snitch
+      - lm-studio
+      - lunar
+      - maccy
+      - mem
+      - micro-snitch
+      - mongodb-compass
+      - mos
+      - rectangle-pro
+      - slack
+      - soulver
+      - ssh-config-editor
+      - syncthing
+      - tailscale
+      - tg-pro
+      - trezor-suite
+      - via
+      - visual-studio-code
+      - vlc
+      - zoom
+
+    mas_apps:
+      937984704: Amphetamine
+      1091189122: Bear
+      1355679052: Dropover
+      1474335294: GoodLinks
+      1529448980: Reeder
+      1491071483: Velja
+      1320666476: Wipr
+
+  ubuntu_server:
+    apt:
+      - bat
+      - fd-find
+      - fish
+      - fzf
+      - neovim
+      - ripgrep
+      - tmux
+      - tree

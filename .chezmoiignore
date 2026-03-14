@@ -1,0 +1,6 @@
+{{ if ne .chezmoi.os "darwin" }}
+Brewfile
+.ideavimrc
+.config/neofetch
+.ssh/config.d/macos.conf
+{{ end }}

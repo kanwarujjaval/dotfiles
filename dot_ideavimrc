@@ -1,0 +1,337 @@
+" ========== Core Vim Settings ==========
+set number
+set relativenumber
+set ignorecase
+set smartcase
+set hlsearch
+set incsearch
+set scrolloff=8
+set sidescrolloff=8
+set clipboard+=unnamed
+set clipboard+=ideaput
+set showmode
+set showcmd
+set visualbell
+set noerrorbells
+
+" ========== Leader Key ==========
+let mapleader = " "
+
+" ========== Insert Mode Escape ==========
+inoremap jk <Esc>
+inoremap kj <Esc>
+
+" ========== Vim Plugin Activation (IdeaVim supported) ==========
+set surround
+set multiple-cursors
+set commentary
+set argtextobj
+set exchange
+set textobj-entire
+set ReplaceWithRegister
+set highlightedyank
+set vim-paragraph-motion
+set textobj-indent
+set matchit
+set easymotion
+set quickscope
+set sneak
+set which-key
+set NERDTree
+
+" ========== IdeaVim-Specific Options ==========
+set ideajoin
+set ideastatusicon=gray
+set idearefactormode=keep
+
+" ========== Which-Key Settings ==========
+set notimeout
+set timeoutlen=5000
+let g:WhichKey_ShowVimActions = "true"
+let g:WhichKey_DefaultDelay = 200
+
+" ========== Which-Key Descriptions ==========
+" File operations
+let g:WhichKeyDesc_file = "<leader>f +File"
+let g:WhichKeyDesc_file_find = "<leader>ff Find files"
+let g:WhichKeyDesc_file_grep = "<leader>fg Grep in project"
+let g:WhichKeyDesc_file_buffer = "<leader>fb Switch buffer"
+let g:WhichKeyDesc_file_help = "<leader>fh Help topics"
+let g:WhichKeyDesc_file_recent = "<leader>fr Recent files"
+let g:WhichKeyDesc_file_command = "<leader>fc Find files"
+let g:WhichKeyDesc_file_commands = "<leader>fC Find commands"
+let g:WhichKeyDesc_file_intentions = "<leader>fk Show intentions"
+let g:WhichKeyDesc_file_search = "<leader>fs Search word at caret"
+
+" Explorer
+let g:WhichKeyDesc_explorer = "<leader>e +Explorer"
+let g:WhichKeyDesc_explorer_explorer = "<leader>ee Toggle explorer"
+let g:WhichKeyDesc_explorer_find = "<leader>ef Find in explorer"
+let g:WhichKeyDesc_explorer_refresh = "<leader>er Refresh/sync file"
+let g:WhichKeyDesc_explorer_quit = "<leader>eq Quit explorer"
+
+" Git
+let g:WhichKeyDesc_git = "<leader>g +Git"
+let g:WhichKeyDesc_git_git = "<leader>gg Git tool window"
+let g:WhichKeyDesc_git_status = "<leader>gs Git status"
+let g:WhichKeyDesc_git_branches = "<leader>gb Git branches"
+let g:WhichKeyDesc_git_commits = "<leader>gc Commit panel"
+let g:WhichKeyDesc_git_file = "<leader>gf Find file"
+let g:WhichKeyDesc_git_history = "<leader>gh File history"
+let g:WhichKeyDesc_git_recent = "<leader>gr Recent projects"
+let g:WhichKeyDesc_git_prev = "<leader>gp Previous change"
+let g:WhichKeyDesc_git_next = "<leader>gn Next change"
+let g:WhichKeyDesc_git_revert = "<leader>gR Revert changes"
+let g:WhichKeyDesc_git_stage = "<leader>gS Stage changes"
+let g:WhichKeyDesc_git_undo = "<leader>gu Undo changes"
+let g:WhichKeyDesc_git_diff = "<leader>gd Diff vs last version"
+let g:WhichKeyDesc_git_diff_show = "<leader>gD Show diff preview"
+let g:WhichKeyDesc_git_diff_commits = "<leader>gdc Diff commits"
+let g:WhichKeyDesc_git_diff_quit = "<leader>gdq Quit diff"
+let g:WhichKeyDesc_git_quit = "<leader>gq Quit git window"
+
+" LSP
+let g:WhichKeyDesc_lsp = "<leader>l +LSP"
+let g:WhichKeyDesc_lsp_actions = "<leader>la Code actions"
+let g:WhichKeyDesc_lsp_definition = "<leader>ld Go to definition"
+let g:WhichKeyDesc_lsp_declaration = "<leader>lD Go to declaration"
+let g:WhichKeyDesc_lsp_implementation = "<leader>li Go to implementation"
+let g:WhichKeyDesc_lsp_references = "<leader>lr Find references"
+let g:WhichKeyDesc_lsp_hover = "<leader>lh Show documentation"
+let g:WhichKeyDesc_lsp_signature = "<leader>ls Show signature"
+let g:WhichKeyDesc_lsp_rename = "<leader>ln Rename symbol"
+let g:WhichKeyDesc_lsp_format = "<leader>lf Format code"
+let g:WhichKeyDesc_lsp_format_line = "<leader>ll Format code"
+let g:WhichKeyDesc_lsp_type = "<leader>lt Go to type definition"
+let g:WhichKeyDesc_lsp_workspace = "<leader>lw Workspace search"
+let g:WhichKeyDesc_lsp_diagnostics = "<leader>lx Show diagnostics"
+let g:WhichKeyDesc_lsp_prev_error = "<leader>l[ Previous error"
+let g:WhichKeyDesc_lsp_next_error = "<leader>l] Next error"
+let g:WhichKeyDesc_lsp_eslint = "<leader>le ESLint fix"
+let g:WhichKeyDesc_lsp_prettier = "<leader>lp Prettier format"
+
+" Debug
+let g:WhichKeyDesc_debug = "<leader>d +Debug"
+let g:WhichKeyDesc_debug_breakpoint = "<leader>db Toggle breakpoint"
+let g:WhichKeyDesc_debug_continue = "<leader>dc Continue/Resume"
+let g:WhichKeyDesc_debug_step_over = "<leader>ds Step over"
+let g:WhichKeyDesc_debug_step_into = "<leader>di Step into"
+let g:WhichKeyDesc_debug_step_out = "<leader>do Step out"
+let g:WhichKeyDesc_debug_restart = "<leader>dr Restart"
+let g:WhichKeyDesc_debug_terminate = "<leader>dt Terminate"
+let g:WhichKeyDesc_debug_ui = "<leader>du Debug UI"
+let g:WhichKeyDesc_debug_quit = "<leader>dq Quit debug"
+
+" Buffers
+let g:WhichKeyDesc_buffer = "<leader>b +Buffer"
+let g:WhichKeyDesc_buffer_buffer = "<leader>bb Switch buffer"
+let g:WhichKeyDesc_buffer_delete = "<leader>bd Delete buffer"
+let g:WhichKeyDesc_buffer_next = "<leader>bn Next buffer"
+let g:WhichKeyDesc_buffer_previous = "<leader>bp Previous buffer"
+let g:WhichKeyDesc_buffer_find = "<leader>bf Find buffer"
+let g:WhichKeyDesc_buffer_last = "<leader>bl Last buffer"
+let g:WhichKeyDesc_buffer_1 = "<leader>b1 Buffer 1"
+let g:WhichKeyDesc_buffer_2 = "<leader>b2 Buffer 2"
+let g:WhichKeyDesc_buffer_3 = "<leader>b3 Buffer 3"
+let g:WhichKeyDesc_buffer_4 = "<leader>b4 Buffer 4"
+let g:WhichKeyDesc_buffer_5 = "<leader>b5 Buffer 5"
+let g:WhichKeyDesc_buffer_6 = "<leader>b6 Buffer 6"
+let g:WhichKeyDesc_buffer_7 = "<leader>b7 Buffer 7"
+let g:WhichKeyDesc_buffer_8 = "<leader>b8 Buffer 8"
+let g:WhichKeyDesc_buffer_9 = "<leader>b9 Buffer 9"
+
+" Terminal
+let g:WhichKeyDesc_terminal = "<leader>t +Terminal"
+let g:WhichKeyDesc_terminal_terminal = "<leader>tt Toggle terminal"
+let g:WhichKeyDesc_terminal_quit = "<leader>tq Quit terminal"
+let g:WhichKeyDesc_terminal_file = "<leader>tf Open file in terminal"
+let g:WhichKeyDesc_terminal_here = "<leader>th Open here in terminal"
+let g:WhichKeyDesc_terminal_vertical = "<leader>tv Open vertical terminal"
+
+" UI
+let g:WhichKeyDesc_ui = "<leader>u +UI"
+let g:WhichKeyDesc_ui_toggle_numbers = "<leader>ut Toggle relative numbers"
+let g:WhichKeyDesc_ui_toggle_wrap = "<leader>uw Toggle line wrap"
+
+" Zen
+let g:WhichKeyDesc_zen = "<leader>z +Zen"
+let g:WhichKeyDesc_zen_zen = "<leader>zz Zen mode"
+let g:WhichKeyDesc_zen_fullscreen = "<leader>zf Fullscreen"
+
+" Comments
+let g:WhichKeyDesc_comment_line = "<leader>/ Toggle line comment"
+let g:WhichKeyDesc_comment_block = "<leader>? Toggle block comment"
+
+" ========== Window Navigation ==========
+nmap <C-h> <Action>(PrevSplitter)
+nmap <C-l> <Action>(NextSplitter)
+nmap <C-j> <Action>(NextSplitter)
+nmap <C-k> <Action>(PrevSplitter)
+
+nmap <C-w>h <Action>(PrevSplitter)
+nmap <C-w>l <Action>(NextSplitter)
+nmap <C-w>j <Action>(NextSplitter)
+nmap <C-w>k <Action>(PrevSplitter)
+nmap <C-w>w <Action>(NextSplitter)
+nmap <C-w>o <Action>(UnsplitAll)
+nmap <C-w>c <Action>(Unsplit)
+nmap <C-w>s <Action>(SplitHorizontally)
+nmap <C-w>v <Action>(SplitVertically)
+nmap <C-w>= <Action>(UnsplitAll)
+
+" ========== File/Search ==========
+nmap <leader>ff <Action>(GotoFile)
+nmap <leader>fg <Action>(FindInPath)
+nmap <leader>fb <Action>(Switcher)
+nmap <leader>fh <Action>(HelpTopics)
+nmap <leader>fr <Action>(RecentFiles)
+nmap <leader>fc <Action>(GotoFile)
+nmap <leader>fC <Action>(GotoAction)
+nmap <leader>fk <Action>(ShowIntentionActions)
+nmap <leader>fs <Action>(FindWordAtCaret)
+
+" ========== Explorer ==========
+nmap <leader>ee <Action>(ActivateProjectToolWindow)
+nmap <leader>ef <Action>(SelectInProjectView)
+nmap <leader>er <Action>(SynchronizeCurrentFile)
+nmap <leader>eq <Action>(HideActiveWindow)
+
+" ========== Git ==========
+nmap <leader>gg <Action>(ActivateVersionControlToolWindow)
+nmap <leader>gs <Action>(ActivateVersionControlToolWindow)
+nmap <leader>gb <Action>(Git.Branches)
+nmap <leader>gc <Action>(ActivateCommitToolWindow)
+nmap <leader>gf <Action>(GotoFile)
+nmap <leader>gh <Action>(Vcs.ShowTabbedFileHistory)
+nmap <leader>gr <Action>(ManageRecentProjects)
+nmap <leader>gp <Action>(VcsShowPrevChangeMarker)
+nmap <leader>gn <Action>(VcsShowNextChangeMarker)
+nmap <leader>gR <Action>(ChangesView.Revert)
+nmap <leader>gS <Action>(ChangesView.AddUnversioned)
+nmap <leader>gu <Action>(Vcs.RollbackChangedLines)
+nmap <leader>gd <Action>(Compare.LastVersion)
+nmap <leader>gD <Action>(Vcs.ShowDiffPreview)
+nmap <leader>gdc <Action>(Vcs.ShowTabbedFileHistory)
+nmap <leader>gdq <Action>(HideActiveWindow)
+nmap <leader>gq <Action>(HideActiveWindow)
+
+" ========== LSP ==========
+nmap <leader>la <Action>(ShowIntentionActions)
+nmap <leader>ld <Action>(GotoDeclaration)
+nmap <leader>lD <Action>(GotoDeclaration)
+nmap <leader>li <Action>(GotoImplementation)
+nmap <leader>lr <Action>(FindUsages)
+nmap <leader>lh <Action>(QuickJavaDoc)
+nmap <leader>ls <Action>(ParameterInfo)
+nmap <leader>ln <Action>(RenameElement)
+nmap <leader>lf <Action>(ReformatCode)
+nmap <leader>ll <Action>(ReformatCode)
+nmap <leader>lt <Action>(GotoTypeDeclaration)
+nmap <leader>lw <Action>(FindInPath)
+nmap <leader>lx <Action>(ActivateProblemsViewToolWindow)
+nmap <leader>l[ <Action>(GotoPreviousError)
+nmap <leader>l] <Action>(GotoNextError)
+nmap <leader>le <Action>(Javascript.Linters.EsLint.Fix)
+nmap <leader>lp <Action>(PrettierAction)
+
+" ========== Debugging ==========
+nmap <leader>db <Action>(ToggleLineBreakpoint)
+nmap <leader>dc <Action>(Resume)
+nmap <leader>ds <Action>(StepOver)
+nmap <leader>di <Action>(StepInto)
+nmap <leader>do <Action>(StepOut)
+nmap <leader>dr <Action>(Rerun)
+nmap <leader>dt <Action>(Stop)
+nmap <leader>du <Action>(ActivateDebugToolWindow)
+nmap <leader>dq <Action>(HideActiveWindow)
+
+" ========== Buffers ==========
+nmap <leader>bb <Action>(Switcher)
+nmap <leader>bd <Action>(CloseContent)
+nmap <leader>bn <Action>(NextTab)
+nmap <leader>bp <Action>(PreviousTab)
+nmap <leader>bf <Action>(GoToTab)
+nmap <leader>bl <Action>(GoToTab)
+
+nmap <leader>b1 <Action>(GoToTab1)
+nmap <leader>b2 <Action>(GoToTab2)
+nmap <leader>b3 <Action>(GoToTab3)
+nmap <leader>b4 <Action>(GoToTab4)
+nmap <leader>b5 <Action>(GoToTab5)
+nmap <leader>b6 <Action>(GoToTab6)
+nmap <leader>b7 <Action>(GoToTab7)
+nmap <leader>b8 <Action>(GoToTab8)
+nmap <leader>b9 <Action>(GoToTab9)
+
+" ========== Terminal ==========
+nmap <leader>tt <Action>(ActivateTerminalToolWindow)
+nmap <leader>tq <Action>(HideActiveWindow)
+nmap <leader>tf <Action>(Terminal.OpenInTerminal)
+nmap <leader>th <Action>(Terminal.OpenInTerminal)
+nmap <leader>tv <Action>(Terminal.OpenInTerminal)
+
+" ========== UI Toggles ==========
+nmap <leader>ut :set relativenumber!<CR>
+nmap <leader>uw :set wrap!<CR>
+
+" ========== Zen Mode ==========
+nmap <leader>zz <Action>(ToggleDistractionFreeMode)
+nmap <leader>zf <Action>(ToggleFullScreen)
+
+" ========== Commenting ==========
+nmap <leader>/ <Action>(CommentByLineComment)
+vmap <leader>/ <Action>(CommentByLineComment)
+nmap <leader>? <Action>(CommentByBlockComment)
+vmap <leader>? <Action>(CommentByBlockComment)
+
+" ========== Navigation & Misc ==========
+nmap gd <Action>(GotoDeclaration)
+nmap gD <Action>(GotoDeclaration)
+nmap gi <Action>(GotoImplementation)
+nmap gr <Action>(FindUsages)
+nmap K <Action>(QuickJavaDoc)
+nmap <C-k> <Action>(ParameterInfo)
+nmap [d <Action>(GotoPreviousError)
+nmap ]d <Action>(GotoNextError)
+nmap [h <Action>(VcsShowPrevChangeMarker)
+nmap ]h <Action>(VcsShowNextChangeMarker)
+nmap [b <Action>(PreviousTab)
+nmap ]b <Action>(NextTab)
+
+" ========== Folding ==========
+" nmap zc <Action>(CollapseRegion)
+" nmap zo <Action>(ExpandRegion)
+" nmap zC <Action>(CollapseRegionRecursively)
+" nmap zO <Action>(ExpandRegionRecursively)
+" nmap za <Action>(ExpandCollapseToggleAction)
+" nmap zM <Action>(CollapseAllRegions)
+" nmap zR <Action>(ExpandAllRegions)
+" nmap zf <Action>(SurroundWith)
+
+" ========== Multicursor ==========
+nmap <C-d> <Action>(SelectNextOccurrence)
+nmap <C-A-n> <Action>(SelectAllOccurrences)
+
+" ========== Insert Mode Helpers ==========
+imap <C-S-k> <C-o><Action>(ParameterInfo)
+imap <C-Space> <C-o><Action>(CodeCompletion)
+imap <C-@> <C-o><Action>(CodeCompletion)
+
+" ========== Enhanced Editing ==========
+nnoremap Y y$
+nnoremap n nzzzv
+nnoremap N Nzzzv
+vnoremap < <gv
+vnoremap > >gv
+nnoremap J mzJ`z
+inoremap , ,<C-g>u
+inoremap . .<C-g>u
+inoremap ! !<C-g>u
+inoremap ? ?<C-g>u
+
+" ========== Debug Function Keys ==========
+map <F5> <Action>(Resume)
+map <F9> <Action>(ToggleLineBreakpoint)
+map <F10> <Action>(StepOver)
+map <F11> <Action>(StepInto)
+map <F12> <Action>(StepOut)

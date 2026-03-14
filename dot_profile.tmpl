@@ -1,0 +1,4 @@
+{{ if eq .chezmoi.os "darwin" -}}
+# Added by Toolbox App
+export PATH="$PATH:{{ .chezmoi.homeDir }}/Library/Application Support/JetBrains/Toolbox/scripts"
+

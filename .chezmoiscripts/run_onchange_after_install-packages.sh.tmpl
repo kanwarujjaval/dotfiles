@@ -1,0 +1,28 @@
+#!/bin/bash
+# packages.yaml hash: {{ include ".chezmoidata/packages.yaml" | sha256sum }}
+
+{{ if eq .chezmoi.os "darwin" -}}
+brew bundle --no-lock --file="{{ .chezmoi.homeDir }}/Brewfile"
+{{ else if eq .chezmoi.os "linux" -}}
+sudo apt update
+sudo apt install -y bat fd-find fish fzf neovim ripgrep tmux tree
+
+# starship (not in default apt repos)
+if ! command -v starship &> /dev/null; then
+  curl -sS https://starship.rs/install.sh | sh -s -- -y
+fi
+
+# zoxide (not in default apt repos)
+if ! command -v zoxide &> /dev/null; then
+  curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+fi
+
+# eza (not in default apt repos)
+if ! command -v eza &> /dev/null; then
+  sudo mkdir -p /etc/apt/keyrings
+  wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | sudo gpg --dearmor -o /etc/apt/keyrings/gierens.gpg
+  echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main" | sudo tee /etc/apt/sources.list.d/gierens.list
+  sudo apt update
+  sudo apt install -y eza
+fi
+{{ end -}}

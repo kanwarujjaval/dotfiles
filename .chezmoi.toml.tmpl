@@ -1,0 +1,26 @@
+{{- $machineRole := promptStringOnce . "machine_role" "Machine role (mac-workstation/ubuntu-server)" -}}
+{{- $isWorkMachine := promptBoolOnce . "is_work_machine" "Is this a work machine" -}}
+{{- $fullName := promptStringOnce . "full_name" "Full name" -}}
+{{- $email := promptStringOnce . "email" "Email" -}}
+{{- $workEmail := "" -}}
+{{- if $isWorkMachine -}}
+{{-   $workEmail = promptStringOnce . "work_email" "Work email" -}}
+{{- end -}}
+
+[data]
+  machine_role = {{ $machineRole | quote }}
+  is_work_machine = {{ $isWorkMachine }}
+  full_name = {{ $fullName | quote }}
+  email = {{ $email | quote }}
+{{- if $isWorkMachine }}
+  work_email = {{ $workEmail | quote }}
+{{- end }}
+{{- if eq $machineRole "mac-workstation" }}
+  enable_tmux_autoattach = false
+  use_forward_agent = true
+  install_gui_apps = true
+{{- else }}
+  enable_tmux_autoattach = true
+  use_forward_agent = false
+  install_gui_apps = false
+{{- end }}
