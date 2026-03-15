@@ -18,7 +18,7 @@ soft() {
 # ── Required binaries ───────────────────────────────────────────
 echo "Binaries"
 for bin in bat chezmoi eza fd fish fzf nvim rg starship tmux tree zoxide; do
-  check "$bin" "command -v $bin"
+  check "$bin" "command -v $bin || command -v ${bin}cat || command -v ${bin}find"
 done
 {{ if eq .chezmoi.os "darwin" -}}
 for bin in brew gh helm k9s op wget; do

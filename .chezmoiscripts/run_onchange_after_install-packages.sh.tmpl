@@ -7,14 +7,28 @@ brew bundle --file="{{ .chezmoi.homeDir }}/Brewfile"
 sudo apt update
 sudo apt install -y{{ range .packages.apt }}{{ range .packages }} {{ . }}{{ end }}{{ end }}
 
-# starship (not in default apt repos)
+# starship (not in default apt repos, install to ~/.local/bin)
 if ! command -v starship &> /dev/null; then
-  curl -sS https://starship.rs/install.sh | sh -s -- -y
+  mkdir -p "{{ .chezmoi.homeDir }}/.local/bin"
+  curl -sS https://starship.rs/install.sh | sh -s -- -y --bin-dir "{{ .chezmoi.homeDir }}/.local/bin"
 fi
 
-# zoxide (not in default apt repos)
+# zoxide (installs to ~/.local/bin by default)
 if ! command -v zoxide &> /dev/null; then
   curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+fi
+
+# chezmoi — ensure it's on PATH (installer puts it in ~/bin)
+if [ -f "{{ .chezmoi.homeDir }}/bin/chezmoi" ] && [ ! -f "{{ .chezmoi.homeDir }}/.local/bin/chezmoi" ]; then
+  ln -sf "{{ .chezmoi.homeDir }}/bin/chezmoi" "{{ .chezmoi.homeDir }}/.local/bin/chezmoi"
+fi
+
+# Ubuntu binary name aliases (bat→batcat, fd→fdfind)
+if command -v batcat &> /dev/null && ! command -v bat &> /dev/null; then
+  ln -sf "$(which batcat)" "{{ .chezmoi.homeDir }}/.local/bin/bat"
+fi
+if command -v fdfind &> /dev/null && ! command -v fd &> /dev/null; then
+  ln -sf "$(which fdfind)" "{{ .chezmoi.homeDir }}/.local/bin/fd"
 fi
 
 # eza (not in default apt repos)
