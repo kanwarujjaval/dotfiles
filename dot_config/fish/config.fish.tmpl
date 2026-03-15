@@ -5,8 +5,13 @@ end
 set -g fish_greeting
 set -gx EDITOR nvim
 
+# PATH — must be before any tool init
+set -gx PATH {{ .chezmoi.homeDir }}/.local/bin $PATH /usr/local/bin
+set -gx XDG_CONFIG_HOME "$HOME/.config"
+
 starship init fish | source
 zoxide init fish | source
+fzf --fish 2>/dev/null | source
 
 alias ll="eza -g --icons --git"
 alias lla="eza -la -g --icons --git"
@@ -19,12 +24,7 @@ alias v="nvim"
 alias brewup="brew update && brew upgrade --greedy && brew cleanup --prune=all && brew autoremove"
 {{ end -}}
 
-set -gx PATH $PATH /usr/local/bin
-set -gx XDG_CONFIG_HOME "$HOME/.config"
 abbr -a prs "gh pr list | fzf --preview 'gh pr diff {+1}' --preview-window=up:80%"
-fzf --fish | source
-
-set PATH $PATH {{ .chezmoi.homeDir }}/.local/bin
 {{ if eq .chezmoi.os "darwin" -}}
 # Google Cloud SDK
 if [ -f '{{ .chezmoi.homeDir }}/google-cloud-sdk/path.fish.inc' ]

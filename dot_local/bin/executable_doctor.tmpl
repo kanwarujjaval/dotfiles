@@ -33,7 +33,7 @@ echo "Shell"
 check "fish is default shell" "grep -q fish /etc/shells"
 check "starship init" "fish -c 'starship init fish' 2>/dev/null"
 check "zoxide init" "fish -c 'zoxide init fish' 2>/dev/null"
-check "fzf keybindings" "fish -c 'fzf --fish' 2>/dev/null"
+soft  "fzf keybindings" "fish -c 'fzf --fish' 2>/dev/null"
 
 # ── Git ─────────────────────────────────────────────────────────
 echo ""

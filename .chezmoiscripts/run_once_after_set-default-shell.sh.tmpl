@@ -8,11 +8,8 @@ if [ -n "$FISH_PATH" ]; then
     echo "$FISH_PATH" | sudo tee -a /etc/shells
   fi
 
-  # Notify if shell needs changing (requires interactive password)
+  # Change default shell
   if [ "$SHELL" != "$FISH_PATH" ]; then
-    echo ""
-    echo "NOTE: Default shell is $SHELL, not fish."
-    echo "Run manually: chsh -s $FISH_PATH"
-    echo ""
+    sudo chsh -s "$FISH_PATH" "$(whoami)"
   fi
 fi
