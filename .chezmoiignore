@@ -1,3 +1,5 @@
+quickstart.md
+
 {{ if ne .chezmoi.os "darwin" }}
 Brewfile
 .ideavimrc
