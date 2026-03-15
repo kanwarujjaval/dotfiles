@@ -1,9 +1,11 @@
 packages:
   common_cli:
+    - chezmoi
     - bat
     - eza
     - fd
     - fish
+    - fisher
     - fzf
     - k6
     - neovim
@@ -16,78 +18,69 @@ packages:
   mac_workstation:
     formulae:
       - bottom
-      - ccusage
       - cocoapods
       - fnm
       - gemini-cli
       - gh
-      - git-delta
+      - helm
       - k9s
       - kustomize
-      - neofetch
       - openjdk
       - pipx
       - pyenv
-      - python-setuptools
       - python@3.11
       - wget
       - ykman
 
     casks:
-      - 1password
+      # 1password: manual standalone install on macOS
       - 1password-cli
       - alfred
       - android-commandlinetools
       - appcleaner
-      - arc
       - bartender
       - bruno
       - chatgpt
       - claude
       - claude-code
       - codex
+      - codex-app
       - coteditor
-      - cursor
-      - daisydisk
       - discord
-      - docker
       - figma
       - font-hasklig
       - font-sauce-code-pro-nerd-font
       - font-terminus
       - freedom
       - ghostty
-      - gitkraken
       - google-chrome
       - google-drive
-      - handbrake
+      - handbrake-app
       - hush
       - ivpn
-      - jetbrains-toolbox
       - keka
       - knockknock
       - little-snitch
-      - lm-studio
       - lunar
       - maccy
-      - mem
+      # mem: manual standalone install on macOS
       - micro-snitch
       - mongodb-compass
       - mos
-      - rectangle-pro
       - slack
       - soulver
-      - ssh-config-editor
-      - syncthing
-      - tailscale
+      # ssh-config-editor: managed via Mac App Store
+      - syncthing-app
+      # tailscale: manual standalone install on macOS (https://tailscale.com/docs/install/mac)
       - tg-pro
       - trezor-suite
-      - via
       - visual-studio-code
       - vlc
+      - yubico-authenticator
       - zoom
 
     mas_apps:
+      411643860: DaisyDisk
       937984704: Amphetamine
       1091189122: Bear
       1355679052: Dropover
@@ -104,5 +97,6 @@ packages:
       - fzf
       - neovim
       - ripgrep
+      - tailscale
       - tmux
       - tree
