@@ -1,0 +1,15 @@
+#!/bin/bash
+# bootstrap — apply chezmoi and verify system state
+set -e
+
+echo "=== Bootstrap ==="
+
+# Apply chezmoi
+echo "Applying dotfiles..."
+chezmoi apply
+
+# Verify
+echo ""
+echo "Running doctor..."
+echo ""
+{{ .chezmoi.homeDir }}/.local/bin/doctor

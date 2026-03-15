@@ -1,0 +1,41 @@
+# Generated from packages.yaml — do not edit directly
+# vim: set ft=ruby:
+
+# Taps
+{{- range .packages.taps }}
+tap "{{ . }}"
+{{- end }}
+
+# Formulae
+{{- range .packages.formulae }}
+
+# {{ .category }}
+{{- range .packages }}
+brew "{{ . }}"
+{{- end }}
+{{- end }}
+
+# Casks
+{{- range .packages.casks }}
+
+# {{ .category }}
+{{- range .packages }}
+cask "{{ . }}"
+{{- end }}
+{{- end }}
+
+# Mac App Store
+{{- range .packages.mas }}
+
+# {{ .category }}
+{{- range .apps }}
+mas "{{ .name }}", id: {{ .id }}
+{{- end }}
+{{- end }}
+
+# Manual installs (not managed by brew):
+{{- range .packages.manual }}
+{{- if eq .platform "mac" }}
+# {{ .name }}: {{ .reason }}
+{{- end }}
+{{- end }}

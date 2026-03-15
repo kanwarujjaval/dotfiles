@@ -1,18 +1,23 @@
 [user]
 	name = {{ .full_name }}
 	email = {{ .email }}
-{{- if eq .chezmoi.os "darwin" }}
 	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBQOqVUXiWB2r3uZ14L5LiEskwUKbJG/ESlyjaEiJe8E
 
 [gpg]
 	format = ssh
 
+{{- if eq .chezmoi.os "darwin" }}
+
 [gpg "ssh"]
 	program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+{{- else }}
+
+[gpg "ssh"]
+	allowedSignersFile = ~/.ssh/allowed_signers
+{{- end }}
 
 [commit]
 	gpgsign = true
-{{- end }}
 
 [diff]
 	colorMoved = default

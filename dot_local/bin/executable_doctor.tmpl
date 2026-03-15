@@ -1,0 +1,94 @@
+#!/bin/bash
+# doctor — validate system health against chezmoi-defined state
+set -o pipefail
+
+PASS=0 FAIL=0 WARN=0
+
+pass() { echo "  ok  $1"; ((PASS++)); }
+fail() { echo "  FAIL  $1"; ((FAIL++)); }
+warn() { echo "  WARN  $1"; ((WARN++)); }
+
+check() {
+  if eval "$2" &>/dev/null; then pass "$1"; else fail "$1"; fi
+}
+soft() {
+  if eval "$2" &>/dev/null; then pass "$1"; else warn "$1"; fi
+}
+
+# ── Required binaries ───────────────────────────────────────────
+echo "Binaries"
+for bin in bat chezmoi eza fd fish fzf nvim rg starship tmux tree zoxide; do
+  check "$bin" "command -v $bin"
+done
+{{ if eq .chezmoi.os "darwin" -}}
+for bin in brew gh helm k9s mas op wget; do
+  check "$bin" "command -v $bin"
+done
+{{ end -}}
+
+# ── Shell ───────────────────────────────────────────────────────
+echo ""
+echo "Shell"
+check "fish is default shell" "grep -q fish /etc/shells"
+check "starship init" "fish -c 'starship init fish' 2>/dev/null"
+check "zoxide init" "fish -c 'zoxide init fish' 2>/dev/null"
+check "fzf keybindings" "fish -c 'fzf --fish' 2>/dev/null"
+
+# ── Git ─────────────────────────────────────────────────────────
+echo ""
+echo "Git signing"
+check "git installed" "command -v git"
+check "git >= 2.34" "test $(git --version | grep -oE '[0-9]+' | head -1) -ge 2"
+check "gpg.format = ssh" "test \"$(git config --global gpg.format)\" = ssh"
+check "commit.gpgsign = true" "test \"$(git config --global commit.gpgsign)\" = true"
+check "user.signingkey set" "test -n \"$(git config --global user.signingkey)\""
+{{ if eq .chezmoi.os "darwin" -}}
+check "1Password ssh signer" "test -x /Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+{{ else -}}
+check "allowed_signers file" "test -f {{ .chezmoi.homeDir }}/.ssh/allowed_signers"
+{{ end -}}
+
+# ── SSH / 1Password ─────────────────────────────────────────────
+echo ""
+echo "SSH agent"
+{{ if eq .chezmoi.os "darwin" -}}
+check "1Password agent socket" "test -S '{{ .chezmoi.homeDir }}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock'"
+{{ end -}}
+check "ssh-add lists keys" "ssh-add -l 2>/dev/null | grep -q ssh"
+check "ssh config exists" "test -f {{ .chezmoi.homeDir }}/.ssh/config"
+check "ssh config.d exists" "test -d {{ .chezmoi.homeDir }}/.ssh/config.d"
+
+# ── Chezmoi ─────────────────────────────────────────────────────
+echo ""
+echo "Chezmoi"
+check "source dir exists" "test -d {{ .chezmoi.homeDir }}/.local/share/chezmoi"
+soft  "chezmoi diff clean" "test -z \"$(chezmoi diff 2>&1)\""
+
+{{ if eq .chezmoi.os "darwin" -}}
+# ── Brew health ─────────────────────────────────────────────────
+echo ""
+echo "Brew"
+soft  "brew bundle check" "brew bundle check --file={{ .chezmoi.homeDir }}/Brewfile 2>/dev/null"
+soft  "no orphaned deps" "test -z \"$(brew autoremove --dry-run 2>&1 | grep Uninstalling)\""
+
+# ── Networking ──────────────────────────────────────────────────
+echo ""
+echo "Networking"
+soft  "Tailscale running" "pgrep -f Tailscale"
+soft  "OrbStack running" "pgrep -f OrbStack"
+{{ end -}}
+
+{{ if eq .chezmoi.os "linux" -}}
+# ── Docker ──────────────────────────────────────────────────────
+echo ""
+echo "Docker"
+check "docker installed" "command -v docker"
+soft  "docker daemon running" "docker info 2>/dev/null"
+soft  "user in docker group" "groups | grep -q docker"
+{{ end -}}
+
+# ── Results ─────────────────────────────────────────────────────
+echo ""
+echo "---"
+echo "$PASS passed, $FAIL failed, $WARN warnings"
+[ "$FAIL" -eq 0 ]

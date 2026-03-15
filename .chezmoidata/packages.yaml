@@ -1,102 +1,154 @@
 packages:
-  common_cli:
-    - chezmoi
-    - bat
-    - eza
-    - fd
-    - fish
-    - fisher
-    - fzf
-    - k6
-    - neovim
-    - ripgrep
-    - starship
-    - tmux
-    - tree
-    - zoxide
+  taps:
+    - derailed/k9s
 
-  mac_workstation:
-    formulae:
-      - bottom
-      - cocoapods
-      - fnm
-      - gemini-cli
-      - gh
-      - helm
-      - k9s
-      - kustomize
-      - openjdk
-      - pipx
-      - pyenv
-      - python@3.11
-      - wget
-      - ykman
+  # Formulae: ordered array of categories (preserves render order)
+  formulae:
+    - category: common
+      packages:
+        - bat
+        - chezmoi
+        - eza
+        - fd
+        - fish
+        - fisher
+        - fzf
+        - neovim
+        - ripgrep
+        - starship
+        - tmux
+        - tree
+        - zoxide
 
-    casks:
-      # 1password: manual standalone install on macOS
-      - 1password-cli
-      - alfred
-      - android-commandlinetools
-      - appcleaner
-      - bartender
-      - bruno
-      - chatgpt
-      - claude
-      - claude-code
-      - codex
-      - codex-app
-      - coteditor
-      - discord
-      - figma
-      - font-hasklig
-      - font-sauce-code-pro-nerd-font
-      - font-terminus
-      - freedom
-      - ghostty
-      - google-chrome
-      - google-drive
-      - handbrake-app
-      - hush
-      - ivpn
-      - keka
-      - knockknock
-      - little-snitch
-      - lunar
-      - maccy
-      # mem: manual standalone install on macOS
-      - micro-snitch
-      - mongodb-compass
-      - mos
-      - slack
-      - soulver
-      # ssh-config-editor: managed via Mac App Store
-      - syncthing-app
-      # tailscale: manual standalone install on macOS (https://tailscale.com/docs/install/mac)
-      - tg-pro
-      - trezor-suite
-      - visual-studio-code
-      - vlc
-      - yubico-authenticator
-      - zoom
+    - category: dev
+      packages:
+        - cocoapods
+        - fnm
+        - gh
+        - openjdk
+        - pipx
+        - pyenv
+        - python@3.11
 
-    mas_apps:
-      411643860: DaisyDisk
-      937984704: Amphetamine
-      1091189122: Bear
-      1355679052: Dropover
-      1474335294: GoodLinks
-      1529448980: Reeder
-      1491071483: Velja
-      1320666476: Wipr
+    - category: devops
+      packages:
+        - "derailed/k9s/k9s"
+        - helm
+        - k6
+        - kustomize
 
-  ubuntu_server:
-    apt:
-      - bat
-      - fd-find
-      - fish
-      - fzf
-      - neovim
-      - ripgrep
-      - tailscale
-      - tmux
-      - tree
+    - category: ai
+      packages:
+        - gemini-cli
+
+    - category: system
+      packages:
+        - bottom
+        - mas
+        - wget
+        - ykman
+
+  # Casks: ordered array of categories
+  casks:
+    - category: dev_tools
+      packages:
+        - android-commandlinetools
+        - bruno
+        - claude-code
+        - codex
+        - codex-app
+        - coteditor
+        - ghostty
+        - mongodb-compass
+        - orbstack
+        - visual-studio-code
+
+    - category: productivity
+      packages:
+        - alfred
+        - bartender
+        - chatgpt
+        - claude
+        - discord
+        - figma
+        - freedom
+        - maccy
+        - mos
+        - slack
+        - soulver
+        - zoom
+
+    - category: security
+      packages:
+        - 1password-cli
+        - hush
+        - ivpn
+        - knockknock
+        - little-snitch
+        - micro-snitch
+        - yubico-authenticator
+
+    - category: system
+      packages:
+        - appcleaner
+        - google-chrome
+        - google-drive
+        - keka
+        - lunar
+        - syncthing-app
+        - tg-pro
+        - trezor-suite
+
+    - category: media
+      packages:
+        - handbrake-app
+        - vlc
+
+    - category: fonts
+      packages:
+        - font-hasklig
+        - font-sauce-code-pro-nerd-font
+        - font-terminus
+
+  # Mac App Store apps
+  mas:
+    - category: productivity
+      apps:
+        - { name: Amphetamine, id: 937984704 }
+        - { name: Bear, id: 1091189122 }
+        - { name: DaisyDisk, id: 411643860 }
+        - { name: Dropover, id: 1355679052 }
+        - { name: GoodLinks, id: 1474335294 }
+        - { name: Reeder, id: 1529448980 }
+        - { name: Velja, id: 1491071483 }
+
+    - category: security
+      apps:
+        - { name: Wipr, id: 1320666476 }
+
+  # Linux apt packages (different names where needed)
+  apt:
+    - category: common
+      packages:
+        - bat
+        - fd-find
+        - fish
+        - fzf
+        - neovim
+        - ripgrep
+        - tailscale
+        - tmux
+        - tree
+
+  # npm global packages (installed via fnm/node)
+  npm:
+    - ccusage
+
+  # Not managed by brew - documented here as the canonical record
+  manual:
+    - { name: 1Password, platform: mac, reason: standalone install }
+    - { name: Docker, platform: mac, reason: OrbStack replaces Docker Desktop }
+    - { name: Docker Engine, platform: linux, reason: official apt repo install }
+    - { name: Mem, platform: mac, reason: standalone install }
+    - { name: SSH Config Editor, platform: mac, reason: managed via Mac App Store }
+    - { name: Tailscale, platform: mac, reason: "standalone install (https://tailscale.com/docs/install/mac)" }
