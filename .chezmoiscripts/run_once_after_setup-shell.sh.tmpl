@@ -1,14 +1,18 @@
 #!/bin/bash
 
-# Set fish as the default shell if it isn't already
 FISH_PATH=$(which fish)
 
 if [ -n "$FISH_PATH" ]; then
+  # Add fish to allowed shells if missing
   if ! grep -q "$FISH_PATH" /etc/shells; then
     echo "$FISH_PATH" | sudo tee -a /etc/shells
   fi
 
+  # Notify if shell needs changing (requires interactive password)
   if [ "$SHELL" != "$FISH_PATH" ]; then
-    chsh -s "$FISH_PATH"
+    echo ""
+    echo "NOTE: Default shell is $SHELL, not fish."
+    echo "Run manually: chsh -s $FISH_PATH"
+    echo ""
   fi
 fi

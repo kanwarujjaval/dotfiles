@@ -44,7 +44,6 @@ packages:
     - category: system
       packages:
         - bottom
-        - mas
         - wget
         - ykman
 
@@ -96,7 +95,7 @@ packages:
         - keka
         - lunar
         - syncthing-app
-        - tg-pro
+        # tg-pro: temporarily removed — upstream checksum mismatch
         - trezor-suite
 
     - category: media
@@ -109,22 +108,6 @@ packages:
         - font-hasklig
         - font-sauce-code-pro-nerd-font
         - font-terminus
-
-  # Mac App Store apps
-  mas:
-    - category: productivity
-      apps:
-        - { name: Amphetamine, id: 937984704 }
-        - { name: Bear, id: 1091189122 }
-        - { name: DaisyDisk, id: 411643860 }
-        - { name: Dropover, id: 1355679052 }
-        - { name: GoodLinks, id: 1474335294 }
-        - { name: Reeder, id: 1529448980 }
-        - { name: Velja, id: 1491071483 }
-
-    - category: security
-      apps:
-        - { name: Wipr, id: 1320666476 }
 
   # Linux apt packages (different names where needed)
   apt:
@@ -150,5 +133,13 @@ packages:
     - { name: Docker, platform: mac, reason: OrbStack replaces Docker Desktop }
     - { name: Docker Engine, platform: linux, reason: official apt repo install }
     - { name: Mem, platform: mac, reason: standalone install }
-    - { name: SSH Config Editor, platform: mac, reason: managed via Mac App Store }
+    - { name: SSH Config Editor, platform: mac, reason: Mac App Store }
     - { name: Tailscale, platform: mac, reason: "standalone install (https://tailscale.com/docs/install/mac)" }
+    - { name: Amphetamine, platform: mac, reason: Mac App Store }
+    - { name: Bear, platform: mac, reason: Mac App Store }
+    - { name: DaisyDisk, platform: mac, reason: Mac App Store }
+    - { name: Dropover, platform: mac, reason: Mac App Store }
+    - { name: GoodLinks, platform: mac, reason: Mac App Store }
+    - { name: Reeder, platform: mac, reason: Mac App Store }
+    - { name: Velja, platform: mac, reason: Mac App Store }
+    - { name: Wipr, platform: mac, reason: Mac App Store }

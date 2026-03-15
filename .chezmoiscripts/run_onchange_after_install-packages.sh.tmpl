@@ -2,7 +2,7 @@
 # packages.yaml hash: {{ include ".chezmoidata/packages.yaml" | sha256sum }}
 
 {{ if eq .chezmoi.os "darwin" -}}
-brew bundle --no-lock --file="{{ .chezmoi.homeDir }}/Brewfile"
+brew bundle --file="{{ .chezmoi.homeDir }}/Brewfile"
 {{ else if eq .chezmoi.os "linux" -}}
 sudo apt update
 sudo apt install -y{{ range .packages.apt }}{{ range .packages }} {{ . }}{{ end }}{{ end }}

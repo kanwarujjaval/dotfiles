@@ -24,15 +24,6 @@ cask "{{ . }}"
 {{- end }}
 {{- end }}
 
-# Mac App Store
-{{- range .packages.mas }}
-
-# {{ .category }}
-{{- range .apps }}
-mas "{{ .name }}", id: {{ .id }}
-{{- end }}
-{{- end }}
-
 # Manual installs (not managed by brew):
 {{- range .packages.manual }}
 {{- if eq .platform "mac" }}

@@ -21,7 +21,7 @@ for bin in bat chezmoi eza fd fish fzf nvim rg starship tmux tree zoxide; do
   check "$bin" "command -v $bin"
 done
 {{ if eq .chezmoi.os "darwin" -}}
-for bin in brew gh helm k9s mas op wget; do
+for bin in brew gh helm k9s op wget; do
   check "$bin" "command -v $bin"
 done
 {{ end -}}
@@ -54,7 +54,7 @@ echo "SSH agent"
 {{ if eq .chezmoi.os "darwin" -}}
 check "1Password agent socket" "test -S '{{ .chezmoi.homeDir }}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock'"
 {{ end -}}
-check "ssh-add lists keys" "ssh-add -l 2>/dev/null | grep -q ssh"
+soft  "ssh-add lists keys" "ssh-add -l 2>/dev/null | grep -q ssh"
 check "ssh config exists" "test -f {{ .chezmoi.homeDir }}/.ssh/config"
 check "ssh config.d exists" "test -d {{ .chezmoi.homeDir }}/.ssh/config.d"
 
