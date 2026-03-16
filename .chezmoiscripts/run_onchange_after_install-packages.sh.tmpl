@@ -63,7 +63,20 @@ fi
 if ! command -v tailscale &> /dev/null; then
   curl -fsSL https://tailscale.com/install.sh | sh
 fi
+
+# fnm (Fast Node Manager — not in default apt repos)
+if ! command -v fnm &> /dev/null; then
+  curl -fsSL https://fnm.vercel.app/install.sh | bash -s -- --install-dir "{{ .chezmoi.homeDir }}/.local/bin" --skip-shell
+fi
 {{ end -}}
+
+# Install default Node.js LTS via fnm if no node available
+if command -v fnm &> /dev/null; then
+  eval "$(fnm env)"
+  if ! command -v node &> /dev/null; then
+    fnm install --lts
+  fi
+fi
 
 # npm global packages (all platforms, requires node)
 if command -v npm &> /dev/null; then
