@@ -1,1 +1,1 @@
-fnm env --use-on-cd | source
+command -v fnm &>/dev/null && fnm env --use-on-cd | source

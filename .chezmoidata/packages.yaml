@@ -121,6 +121,7 @@ packages:
         - ripgrep
         - tmux
         - tree
+        - unzip
 
   # npm global packages (installed via fnm/node)
   npm:
