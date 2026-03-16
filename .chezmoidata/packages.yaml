@@ -15,6 +15,7 @@ packages:
         - fzf
         - neovim
         - ripgrep
+        - sesh
         - starship
         - tmux
         - tree
@@ -90,6 +91,7 @@ packages:
     - category: system
       packages:
         - appcleaner
+        - daisydisk
         - google-chrome
         - google-drive
         - keka
@@ -137,7 +139,6 @@ packages:
     - { name: Tailscale, platform: mac, reason: "standalone install (https://tailscale.com/docs/install/mac)" }
     - { name: Amphetamine, platform: mac, reason: Mac App Store }
     - { name: Bear, platform: mac, reason: Mac App Store }
-    - { name: DaisyDisk, platform: mac, reason: Mac App Store }
     - { name: Dropover, platform: mac, reason: Mac App Store }
     - { name: GoodLinks, platform: mac, reason: Mac App Store }
     - { name: Reeder, platform: mac, reason: Mac App Store }

@@ -64,6 +64,14 @@ if ! command -v tailscale &> /dev/null; then
   curl -fsSL https://tailscale.com/install.sh | sh
 fi
 
+# sesh (smart tmux session manager — not in default apt repos)
+if ! command -v sesh &> /dev/null; then
+  SESH_URL="https://github.com/joshmedeski/sesh/releases/latest/download/sesh_Linux_x86_64.tar.gz"
+  curl -fsSL "$SESH_URL" | tar xz -C /tmp sesh
+  mv /tmp/sesh "{{ .chezmoi.homeDir }}/.local/bin/sesh"
+  chmod +x "{{ .chezmoi.homeDir }}/.local/bin/sesh"
+fi
+
 # fnm (Fast Node Manager — not in default apt repos)
 if ! command -v fnm &> /dev/null; then
   curl -fsSL https://fnm.vercel.app/install | bash -s -- --install-dir "{{ .chezmoi.homeDir }}/.local/bin" --skip-shell

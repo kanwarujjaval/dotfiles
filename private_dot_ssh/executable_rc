@@ -1,0 +1,7 @@
+#!/bin/sh
+# Maintain a stable symlink for SSH agent forwarding in tmux.
+# Without this, reconnecting SSH creates a new socket path but
+# existing tmux sessions still reference the old (dead) one.
+if [ -n "$SSH_AUTH_SOCK" ]; then
+    ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
+fi

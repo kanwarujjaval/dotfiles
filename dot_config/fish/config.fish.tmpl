@@ -9,6 +9,11 @@ set -gx EDITOR nvim
 set -gx PATH {{ .chezmoi.homeDir }}/.local/bin $PATH /usr/local/bin
 set -gx XDG_CONFIG_HOME "$HOME/.config"
 
+# Use stable symlink for SSH agent forwarding in tmux
+if test -S ~/.ssh/ssh_auth_sock
+    set -gx SSH_AUTH_SOCK ~/.ssh/ssh_auth_sock
+end
+
 starship init fish | source
 zoxide init fish | source
 fzf --fish 2>/dev/null | source
