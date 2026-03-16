@@ -16,7 +16,7 @@ fzf --fish 2>/dev/null | source
 alias ll="eza -g --icons --git"
 alias lla="eza -la -g --icons --git"
 alias llt="eza -1 --icons --tree --git-ignore"
-alias search="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}' | xargs nvim"
+alias search="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}' --print0 | xargs -0 nvim"
 alias g="git"
 alias c="clear"
 alias v="nvim"

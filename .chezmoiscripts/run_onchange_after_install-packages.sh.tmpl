@@ -58,6 +58,11 @@ DOCKEREOF
   sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
   sudo usermod -aG docker "$USER"
 fi
+
+# Tailscale (official install script handles repo setup)
+if ! command -v tailscale &> /dev/null; then
+  curl -fsSL https://tailscale.com/install.sh | sh
+fi
 {{ end -}}
 
 # npm global packages (all platforms, requires node)

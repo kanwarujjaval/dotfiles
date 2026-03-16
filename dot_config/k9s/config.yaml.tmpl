@@ -1,6 +1,10 @@
 k9s:
   liveViewAutoRefresh: false
+  {{- if eq .chezmoi.os "darwin" }}
   screenDumpDir: {{ .chezmoi.homeDir }}/Library/Application Support/k9s/screen-dumps
+  {{- else }}
+  screenDumpDir: {{ .chezmoi.homeDir }}/.local/share/k9s/screen-dumps
+  {{- end }}
   refreshRate: 2
   maxConnRetry: 5
   readOnly: false

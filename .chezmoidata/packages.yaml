@@ -119,7 +119,6 @@ packages:
         - fzf
         - neovim
         - ripgrep
-        - tailscale
         - tmux
         - tree
 
