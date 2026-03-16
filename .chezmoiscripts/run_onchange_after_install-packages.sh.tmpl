@@ -66,7 +66,7 @@ fi
 
 # fnm (Fast Node Manager — not in default apt repos)
 if ! command -v fnm &> /dev/null; then
-  curl -fsSL https://fnm.vercel.app/install.sh | bash -s -- --install-dir "{{ .chezmoi.homeDir }}/.local/bin" --skip-shell
+  curl -fsSL https://fnm.vercel.app/install | bash -s -- --install-dir "{{ .chezmoi.homeDir }}/.local/bin" --skip-shell
 fi
 {{ end -}}
 
