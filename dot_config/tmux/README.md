@@ -46,6 +46,8 @@ These are built-in tmux bindings (not overridden) that you'll use frequently.
 | Binding | Action |
 |---------|--------|
 | `<prefix> d` | Detach from session |
+| `<prefix> a` | Last window (since `l` is used for pane nav) |
+| `<prefix> ;` | Last pane |
 | `<prefix> ,` | Rename current window |
 | `<prefix> $` | Rename current session |
 | `<prefix> &` | Kill current window (confirm) |
@@ -54,6 +56,9 @@ These are built-in tmux bindings (not overridden) that you'll use frequently.
 | `<prefix> ?` | List all keybindings |
 | `<prefix> :` | Command prompt |
 | `<prefix> t` | Show clock |
+| `<prefix> q` | Show pane numbers (type number to jump) |
+| `<prefix> i` | Display window info |
+| `<prefix> Space` | Cycle through pane layouts |
 
 ### Pane Navigation
 
