@@ -101,8 +101,8 @@ All prefix-based — works correctly in nested tmux sessions (outer `C-a`, inner
 | `<prefix> S` | Switch session by name (prompt) |
 | `<prefix> D` | Choose and detach a client |
 | `<prefix> y` | Toggle synchronized panes (type in all panes) |
-| `<prefix> [` | Previous session |
-| `<prefix> ]` | Next session |
+| `<prefix> (` | Previous session |
+| `<prefix> )` | Next session |
 
 ### Sesh — Smart Session Manager
 
@@ -150,7 +150,7 @@ Mouse is **on by default** — scroll with wheel, click to select panes, drag to
 
 ### Copy Mode (vi-style, for scrollback and cross-pane)
 
-Enter copy mode with `<prefix> [` to navigate and copy from scrollback buffer. Use this when you need to copy text that spans tmux splits or is above the visible area.
+Enter copy mode with `<prefix> [` to navigate and copy from scrollback buffer. Paste with `<prefix> ]`. Use this when you need to copy text that spans tmux splits or is above the visible area.
 
 **Navigation:**
 
