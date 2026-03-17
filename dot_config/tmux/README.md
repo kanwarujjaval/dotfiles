@@ -1,6 +1,8 @@
 # Tmux Configuration
 
-Managed by [chezmoi](https://chezmoi.io). Prefix key is **`C-a`** (Ctrl+a).
+Managed by [chezmoi](https://chezmoi.io).
+
+**Prefix key:** `C-a` on macOS (local), `C-b` on Linux servers — enables nested sessions without conflicts.
 
 ## Status Bar
 
@@ -16,22 +18,23 @@ RIGHT: [MODE] [HH:MM]
 | Session dots | `●` active, `○` inactive sessions — visual overview at a glance |
 | Hostname | `#h` — identifies which machine (local/sv/nuc) |
 | Current dir | Basename of the active pane's working directory |
-| Mode | `TMUX` (normal) / `PREFIX` (after C-a) / `COPY` (copy mode) / `SYNC` (panes synced) |
+| Mode | `TMUX` (normal) / `PREFIX` (after prefix key) / `COPY` (copy mode) / `SYNC` (panes synced) |
 | Time | `HH:MM` |
 
 ---
 
 ## Keybindings Reference
 
-> All bindings use the prefix `C-a` unless marked **(no prefix)**.
+> All bindings use the prefix key unless marked **(no prefix)**.
+> Prefix is `C-a` on macOS, `C-b` on Linux servers. Examples below use `<prefix>`.
 
 ### Core
 
 | Binding | Action |
 |---------|--------|
-| `C-a` | Prefix key (replaces default `C-b`) |
-| `C-a r` | Reload tmux config |
-| `C-a g` | Popup shell (80% overlay in current dir) |
+| `C-a` (mac) / `C-b` (linux) | Prefix key |
+| `<prefix> r` | Reload tmux config |
+| `<prefix> g` | Popup shell (80% overlay in current dir) |
 
 ### Pane Navigation (vim-tmux-navigator)
 
@@ -50,32 +53,32 @@ Requires the [vim-tmux-navigator](https://github.com/christoomey/vim-tmux-naviga
 
 | Binding | Action |
 |---------|--------|
-| `C-a H` | Resize pane left 5 cells (repeatable) |
-| `C-a J` | Resize pane down 5 cells (repeatable) |
-| `C-a K` | Resize pane up 5 cells (repeatable) |
-| `C-a L` | Resize pane right 5 cells (repeatable) |
-| `C-a z` | Toggle pane zoom (fullscreen) |
+| `<prefix> H` | Resize pane left 5 cells (repeatable) |
+| `<prefix> J` | Resize pane down 5 cells (repeatable) |
+| `<prefix> K` | Resize pane up 5 cells (repeatable) |
+| `<prefix> L` | Resize pane right 5 cells (repeatable) |
+| `<prefix> z` | Toggle pane zoom (fullscreen) |
 
 ### Windows & Splits
 
 | Binding | Action |
 |---------|--------|
-| `C-a c` | New window (inherits current directory) |
-| `C-a "` | Split pane vertically (inherits cwd) |
-| `C-a %` | Split pane horizontally (inherits cwd) |
-| `C-a <` | Move window left (repeatable) |
-| `C-a >` | Move window right (repeatable) |
+| `<prefix> c` | New window (inherits current directory) |
+| `<prefix> "` | Split pane vertically (inherits cwd) |
+| `<prefix> %` | Split pane horizontally (inherits cwd) |
+| `<prefix> <` | Move window left (repeatable) |
+| `<prefix> >` | Move window right (repeatable) |
 
 ### Session Management
 
 | Binding | Action |
 |---------|--------|
-| `C-a s` | Browse sessions (tree view) |
-| `C-a w` | Browse windows (tree view) |
-| `C-a C` | Create new session |
-| `C-a S` | Switch session by name (prompt) |
-| `C-a D` | Choose and detach a client |
-| `C-a y` | Toggle synchronized panes (type in all panes) |
+| `<prefix> s` | Browse sessions (tree view) |
+| `<prefix> w` | Browse windows (tree view) |
+| `<prefix> C` | Create new session |
+| `<prefix> S` | Switch session by name (prompt) |
+| `<prefix> D` | Choose and detach a client |
+| `<prefix> y` | Toggle synchronized panes (type in all panes) |
 | `Option+[` | Previous session **(no prefix)** |
 | `Option+]` | Next session **(no prefix)** |
 
@@ -85,8 +88,8 @@ Requires the [vim-tmux-navigator](https://github.com/christoomey/vim-tmux-naviga
 
 | Binding | Action |
 |---------|--------|
-| `C-a T` | Open sesh session picker |
-| `C-a O` | Toggle to last session |
+| `<prefix> T` | Open sesh session picker |
+| `<prefix> O` | Toggle to last session |
 
 **Inside the sesh picker:**
 
@@ -106,7 +109,7 @@ Requires the [vim-tmux-navigator](https://github.com/christoomey/vim-tmux-naviga
 
 | Binding | Action |
 |---------|--------|
-| `C-a F` | Open tmux-fzf popup |
+| `<prefix> F` | Open tmux-fzf popup |
 
 **Inside the fzf popup**, manage: sessions, windows, panes, commands, keybindings, processes.
 
@@ -114,7 +117,7 @@ Requires the [vim-tmux-navigator](https://github.com/christoomey/vim-tmux-naviga
 
 ## Copy Mode (vi-style)
 
-Enter copy mode with `C-a [` or scroll up with mouse.
+Enter copy mode with `<prefix> [` or scroll up with mouse.
 
 | Binding | Action |
 |---------|--------|
@@ -160,9 +163,9 @@ Managed by [TPM](https://github.com/tmux-plugins/tpm) (Tmux Plugin Manager).
 
 | Binding | Action |
 |---------|--------|
-| `C-a I` | Install new plugins |
-| `C-a U` | Update plugins |
-| `C-a Alt+u` | Remove uninstalled plugins |
+| `<prefix> I` | Install new plugins |
+| `<prefix> U` | Update plugins |
+| `<prefix> Alt+u` | Remove uninstalled plugins |
 
 ---
 
@@ -178,8 +181,8 @@ Sessions are automatically saved every 10 minutes and restored when tmux starts.
 
 | Binding | Action |
 |---------|--------|
-| `C-a C-s` | Save sessions now (resurrect) |
-| `C-a C-r` | Restore sessions (resurrect) |
+| `<prefix> C-s` | Save sessions now (resurrect) |
+| `<prefix> C-r` | Restore sessions (resurrect) |
 
 ---
 
@@ -209,6 +212,7 @@ The status bar uses post-TPM injection (`set -ga`) to append session info, hostn
 | `mode-keys` | `vi` | Vi bindings in copy/search mode |
 | `set-clipboard` | `external` | OSC 52 clipboard integration |
 | `focus-events` | `on` | Neovim autoread support |
+| `extended-keys` | `always` | Shift+Enter and other modified keys work in apps |
 | `word-separators` | `@"=()[]{}:,.` | Better word-by-word selection in copy mode |
 
 ---
@@ -253,10 +257,10 @@ The status bar uses post-TPM injection (`set -ga`) to append session info, hostn
 
 ```bash
 # Install plugins (first time or after adding new ones)
-# Inside tmux, press: C-a I
+# Inside tmux, press: <prefix> I
 
 # Reload config after editing
-# Inside tmux, press: C-a r
+# Inside tmux, press: <prefix> r
 
 # Or from command line:
 tmux source ~/.config/tmux/tmux.conf
