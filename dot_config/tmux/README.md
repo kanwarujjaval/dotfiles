@@ -35,19 +35,18 @@ RIGHT: [MODE] [HH:MM]
 | `C-a` (mac) / `C-b` (linux) | Prefix key |
 | `<prefix> r` | Reload tmux config |
 | `<prefix> g` | Popup shell (80% overlay in current dir) |
+| `<prefix> m` | Toggle mouse on/off |
 
-### Pane Navigation (vim-tmux-navigator)
-
-These work **without prefix** and seamlessly cross vim split / tmux pane boundaries:
+### Pane Navigation
 
 | Binding | Action |
 |---------|--------|
-| `Ctrl+h` | Move left **(no prefix)** |
-| `Ctrl+j` | Move down **(no prefix)** |
-| `Ctrl+k` | Move up **(no prefix)** |
-| `Ctrl+l` | Move right **(no prefix)** |
+| `<prefix> h` | Move to left pane |
+| `<prefix> j` | Move to lower pane |
+| `<prefix> k` | Move to upper pane |
+| `<prefix> l` | Move to right pane |
 
-Requires the [vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator) neovim plugin (configured in `nvim/lua/plugins/init.lua`).
+All prefix-based — works correctly in nested tmux sessions (outer `C-a`, inner `C-b`).
 
 ### Pane Resize
 
@@ -79,8 +78,8 @@ Requires the [vim-tmux-navigator](https://github.com/christoomey/vim-tmux-naviga
 | `<prefix> S` | Switch session by name (prompt) |
 | `<prefix> D` | Choose and detach a client |
 | `<prefix> y` | Toggle synchronized panes (type in all panes) |
-| `Option+[` | Previous session **(no prefix)** |
-| `Option+]` | Next session **(no prefix)** |
+| `<prefix> [` | Previous session |
+| `<prefix> ]` | Next session |
 
 ### Sesh — Smart Session Manager
 
@@ -115,9 +114,18 @@ Requires the [vim-tmux-navigator](https://github.com/christoomey/vim-tmux-naviga
 
 ---
 
-## Copy Mode (vi-style)
+## Copy & Paste
 
-Enter copy mode with `<prefix> [` or scroll up with mouse.
+Mouse is **off by default** for native terminal copy/paste:
+
+- **Select text** with mouse drag (native terminal selection)
+- **Cmd+C** to copy, **Cmd+V** to paste (macOS)
+- **Ctrl+Shift+C** / **Ctrl+Shift+V** (Linux terminals)
+- **`<prefix> m`** toggles mouse on/off (when on: scroll, click panes, resize — but selection requires Shift+drag)
+
+### Copy Mode (vi-style, for scrollback)
+
+Enter copy mode with `<prefix> [` to navigate and copy from scrollback buffer.
 
 | Binding | Action |
 |---------|--------|
@@ -126,22 +134,6 @@ Enter copy mode with `<prefix> [` or scroll up with mouse.
 | `C-v` | Toggle rectangle selection |
 | `y` | Copy selection and exit copy mode |
 | `Escape` | Cancel and exit copy mode |
-| Mouse drag | Selects text but does **not** auto-copy |
-| `Cmd+C` | Terminal-native copy (works on selected text) |
-
-> **Note:** Auto-copy on mouse drag is disabled. Use `y` (tmux clipboard) or `Cmd+C` (terminal passthrough) to explicitly copy.
-
----
-
-## Mouse
-
-Mouse support is enabled globally:
-
-- Click to select panes
-- Click to select windows in status bar
-- Drag pane borders to resize
-- Scroll to enter copy mode
-- Drag to select text (requires explicit copy — see above)
 
 ---
 
@@ -154,8 +146,7 @@ Managed by [TPM](https://github.com/tmux-plugins/tpm) (Tmux Plugin Manager).
 | [tmux-sensible](https://github.com/tmux-plugins/tmux-sensible) | Sensible defaults (utf8, history, key timeouts) |
 | [tmux-resurrect](https://github.com/tmux-plugins/tmux-resurrect) | Save/restore sessions across tmux restarts |
 | [tmux-continuum](https://github.com/tmux-plugins/tmux-continuum) | Auto-save sessions every 10 minutes, auto-restore on start |
-| [monokai-pro.tmux](https://github.com/loctvl842/monokai-pro.tmux) | Monokai Pro color theme with styled status bar and mode indicator |
-| [vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator) | Seamless `Ctrl+h/j/k/l` navigation across vim splits and tmux panes |
+| [monokai-pro.tmux](https://github.com/loctvl842/monokai-pro.tmux) | Monokai Pro color theme ("machine" palette) with styled status bar and mode indicator |
 | [tmux-fzf](https://github.com/sainnhe/tmux-fzf) | fzf-powered session/window/pane/command management |
 | [tmux-session-dots](https://github.com/jtmcginty/tmux-session-dots) | Visual `●○○` dots in status bar showing all sessions |
 
@@ -188,7 +179,7 @@ Sessions are automatically saved every 10 minutes and restored when tmux starts.
 
 ## Theme
 
-**Monokai Pro** ("pro" filter) with custom separators and modules.
+**Monokai Pro** ("machine" palette — blue-tinted) with custom separators and modules.
 
 Available palettes (change via `@monokai-pro-filter`): `pro`, `classic`, `machine`, `octagon`, `ristretto`, `spectrum`
 
@@ -208,7 +199,7 @@ The status bar uses post-TPM injection (`set -ga`) to append session info, hostn
 | `base-index` | `1` | Windows/panes start at 1, not 0 |
 | `renumber-windows` | `on` | No gaps after closing windows |
 | `automatic-rename` | `on` | Window tabs show running command |
-| `mouse` | `on` | Click, scroll, resize, select |
+| `mouse` | `off` | Native terminal copy/paste; toggle with `<prefix> m` |
 | `mode-keys` | `vi` | Vi bindings in copy/search mode |
 | `set-clipboard` | `external` | OSC 52 clipboard integration |
 | `focus-events` | `on` | Neovim autoread support |
@@ -229,7 +220,6 @@ The status bar uses post-TPM injection (`set -ga`) to append session info, hostn
 │   ├── tmux-resurrect/
 │   ├── tmux-continuum/
 │   ├── monokai-pro.tmux/
-│   ├── vim-tmux-navigator/
 │   ├── tmux-fzf/
 │   └── tmux-session-dots/
 └── README.md              # This file
@@ -249,7 +239,7 @@ The status bar uses post-TPM injection (`set -ga`) to append session info, hostn
 | zoxide | sesh | `brew install zoxide` |
 | fd | sesh (dir search) | `brew install fd` / `apt install fd-find` |
 | sesh | session management | `brew install sesh` |
-| neovim + vim-tmux-navigator plugin | seamless nav | `lua/plugins/init.lua` |
+| neovim | editor | `brew install neovim` / `apt install neovim` |
 
 ---
 
