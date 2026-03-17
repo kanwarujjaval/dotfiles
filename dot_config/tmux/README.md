@@ -8,6 +8,7 @@ Managed by [chezmoi](https://chezmoi.io).
 
 ```
 LEFT:  [logo] session-name ●○○ │ hostname:current-dir
+WINDOWS: index:session:command (e.g. 1:myproject:nvim)
 RIGHT: [MODE] [HH:MM]
 ```
 
@@ -18,6 +19,7 @@ RIGHT: [MODE] [HH:MM]
 | Session dots | `●` active, `○` inactive sessions — visual overview at a glance |
 | Hostname | `#h` — identifies which machine (local/sv/nuc) |
 | Current dir | Basename of the active pane's working directory |
+| Window tabs | `#I:#S:#W` — index, session name, current command |
 | Mode | `TMUX` (normal) / `PREFIX` (after prefix key) / `COPY` (copy mode) / `SYNC` (panes synced) |
 | Time | `HH:MM` |
 
@@ -36,6 +38,22 @@ RIGHT: [MODE] [HH:MM]
 | `<prefix> r` | Reload tmux config |
 | `<prefix> g` | Popup shell (80% overlay in current dir) |
 | `<prefix> m` | Toggle mouse on/off |
+
+### Essential Defaults
+
+These are built-in tmux bindings (not overridden) that you'll use frequently.
+
+| Binding | Action |
+|---------|--------|
+| `<prefix> d` | Detach from session |
+| `<prefix> ,` | Rename current window |
+| `<prefix> $` | Rename current session |
+| `<prefix> &` | Kill current window (confirm) |
+| `<prefix> x` | Kill current pane (confirm) |
+| `<prefix> !` | Break pane out to its own window |
+| `<prefix> ?` | List all keybindings |
+| `<prefix> :` | Command prompt |
+| `<prefix> t` | Show clock |
 
 ### Pane Navigation
 
@@ -62,11 +80,16 @@ All prefix-based — works correctly in nested tmux sessions (outer `C-a`, inner
 
 | Binding | Action |
 |---------|--------|
-| `<prefix> c` | New window (inherits current directory) |
+| `<prefix> c` | New window (prompts for name, inherits cwd) |
 | `<prefix> "` | Split pane vertically (inherits cwd) |
 | `<prefix> %` | Split pane horizontally (inherits cwd) |
+| `<prefix> n` | Next window |
+| `<prefix> p` | Previous window |
+| `<prefix> 0-9` | Go to window N |
 | `<prefix> <` | Move window left (repeatable) |
 | `<prefix> >` | Move window right (repeatable) |
+| `<prefix> .` | Move window to index (prompt) |
+| `<prefix> f` | Find window by name |
 
 ### Session Management
 
@@ -74,7 +97,7 @@ All prefix-based — works correctly in nested tmux sessions (outer `C-a`, inner
 |---------|--------|
 | `<prefix> s` | Browse sessions (tree view) |
 | `<prefix> w` | Browse windows (tree view) |
-| `<prefix> C` | Create new session |
+| `<prefix> C` | Create new session (prompts for name) |
 | `<prefix> S` | Switch session by name (prompt) |
 | `<prefix> D` | Choose and detach a client |
 | `<prefix> y` | Toggle synchronized panes (type in all panes) |
@@ -116,16 +139,32 @@ All prefix-based — works correctly in nested tmux sessions (outer `C-a`, inner
 
 ## Copy & Paste
 
-Mouse is **off by default** for native terminal copy/paste:
+Mouse is **on by default** — scroll with wheel, click to select panes, drag to resize.
 
-- **Select text** with mouse drag (native terminal selection)
+### Native Copy (terminal-level)
+
+- **Shift+drag** to select text (bypasses tmux mouse capture)
 - **Cmd+C** to copy, **Cmd+V** to paste (macOS)
 - **Ctrl+Shift+C** / **Ctrl+Shift+V** (Linux terminals)
-- **`<prefix> m`** toggles mouse on/off (when on: scroll, click panes, resize — but selection requires Shift+drag)
+- Works in Ghostty, iTerm2, Kitty, and most modern terminals
 
-### Copy Mode (vi-style, for scrollback)
+### Copy Mode (vi-style, for scrollback and cross-pane)
 
-Enter copy mode with `<prefix> [` to navigate and copy from scrollback buffer.
+Enter copy mode with `<prefix> [` to navigate and copy from scrollback buffer. Use this when you need to copy text that spans tmux splits or is above the visible area.
+
+**Navigation:**
+
+| Binding | Action |
+|---------|--------|
+| `h/j/k/l` | Move cursor |
+| `w/b` | Word forward/backward |
+| `0/$` | Start/end of line |
+| `g/G` | Top/bottom of buffer |
+| `/` | Search forward |
+| `?` | Search backward |
+| `n/N` | Next/previous search match |
+
+**Selection & Copy:**
 
 | Binding | Action |
 |---------|--------|
@@ -134,6 +173,10 @@ Enter copy mode with `<prefix> [` to navigate and copy from scrollback buffer.
 | `C-v` | Toggle rectangle selection |
 | `y` | Copy selection and exit copy mode |
 | `Escape` | Cancel and exit copy mode |
+
+### Mouse Toggle
+
+`<prefix> m` toggles mouse on/off. When off, native terminal selection works without Shift.
 
 ---
 
@@ -199,7 +242,7 @@ The status bar uses post-TPM injection (`set -ga`) to append session info, hostn
 | `base-index` | `1` | Windows/panes start at 1, not 0 |
 | `renumber-windows` | `on` | No gaps after closing windows |
 | `automatic-rename` | `on` | Window tabs show running command |
-| `mouse` | `off` | Native terminal copy/paste; toggle with `<prefix> m` |
+| `mouse` | `on` | Scroll, click panes, resize; Shift+drag for native selection |
 | `mode-keys` | `vi` | Vi bindings in copy/search mode |
 | `set-clipboard` | `external` | OSC 52 clipboard integration |
 | `focus-events` | `on` | Neovim autoread support |

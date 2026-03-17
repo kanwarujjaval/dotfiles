@@ -61,7 +61,6 @@ packages:
         - ghostty
         - mongodb-compass
         - orbstack
-        - visual-studio-code
 
     - category: productivity
       packages:
