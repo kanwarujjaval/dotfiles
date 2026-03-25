@@ -72,6 +72,15 @@ if ! command -v sesh &> /dev/null; then
   chmod +x "{{ .chezmoi.homeDir }}/.local/bin/sesh"
 fi
 
+# k9s (Kubernetes TUI — not in default apt repos)
+if ! command -v k9s &> /dev/null; then
+  K9S_ARCH="{{ .chezmoi.arch }}"
+  K9S_URL="https://github.com/derailed/k9s/releases/latest/download/k9s_Linux_${K9S_ARCH}.tar.gz"
+  curl -fsSL "$K9S_URL" | tar xz -C /tmp k9s
+  mv /tmp/k9s "{{ .chezmoi.homeDir }}/.local/bin/k9s"
+  chmod +x "{{ .chezmoi.homeDir }}/.local/bin/k9s"
+fi
+
 # fnm (Fast Node Manager — not in default apt repos)
 if ! command -v fnm &> /dev/null; then
   curl -fsSL https://fnm.vercel.app/install | bash -s -- --install-dir "{{ .chezmoi.homeDir }}/.local/bin" --skip-shell
