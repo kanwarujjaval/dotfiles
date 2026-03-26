@@ -95,6 +95,7 @@ packages:
         - google-drive
         - keka
         - lunar
+        - rectangle-pro
         - syncthing-app
         # tg-pro: temporarily removed — upstream checksum mismatch
         - trezor-suite
