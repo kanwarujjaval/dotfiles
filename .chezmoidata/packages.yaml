@@ -37,6 +37,7 @@ packages:
         - helm
         - k6
         - kustomize
+        - mole
 
     - category: ai
       packages:
@@ -97,7 +98,7 @@ packages:
         - lunar
         - rectangle-pro
         - syncthing-app
-        # tg-pro: temporarily removed — upstream checksum mismatch
+        - tg-pro
         - trezor-suite
 
     - category: media
